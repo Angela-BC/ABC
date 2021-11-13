@@ -18,6 +18,7 @@ window.addEventListener('load', () => {
 
         // modules
         'content/modules/autoLogin.js?url=@@autoLogin@@',
+        'content/modules/bcx.js',
 
         // main.js as last
         'content/main.js'
