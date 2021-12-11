@@ -1,4 +1,6 @@
 (context => {
+    console.log('bcx.js')
+
     const log = message => {
         context.log(message, 'BCX')
     }
@@ -20,8 +22,9 @@
         }
     }
 
-    context.modules.add('load bcx', {
+    context.modules.add('bcx', {
+        capabilities: [context.capabilities.onStart],
         onStart
-    })
+    })  
 
 })(window.__abc)
