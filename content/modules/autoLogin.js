@@ -1,5 +1,6 @@
 (context => {
     console.log('autoLogin.js')
+    let lastKnownPlayerName = null
 
     const log = message => {
         context.log(message, 'AL')
@@ -9,6 +10,15 @@
         context.error(message, 'AL')
     }
 
+    function getPlayerName() {
+        let name = Player?.AccountName.toLowerCase()
+        if (name === '' || name === undefined || name === null) {
+            name = lastKnownPlayerName
+        } else {
+            lastKnownPlayerName = name
+        }
+        return name
+    }
 
     const onStart = () => {
         log('onStart')
@@ -17,7 +27,7 @@
         
         ServerSocket.on('connect', function () {
             setTimeout(function() {
-                const name = Player?.AccountName.toLowerCase()
+                const name = getPlayerName()
                 if (name === '' || name === undefined || name === null) {
                     error('No username set')
                     return

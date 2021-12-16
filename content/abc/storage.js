@@ -1,6 +1,8 @@
 (()=>{
-    let maxKeyCount = 10000
+    let maxKeyCount = 750
+    let checkCount = 250
     let counter = 1000000
+    let cleanupCounter = 0
     let prefix = ''
 
     function createPrefixFromDate(date){
@@ -44,12 +46,18 @@
     }
 
     createDatePrefix()
+    cleanup()
     setInterval(createDatePrefix, 1000 * 60)
     setInterval(cleanup, 1000 * 60 * 60)
 
     function storeData(data, context){
         const key = `${nextPrefix()}-${context}`
         localStorage.setItem(key, JSON.stringify(data))
+        cleanupCounter++
+        if (cleanupCounter > checkCount) {
+            cleanup()
+            cleanupCounter = 0
+        }
     }
 
     window.__abc.storage = {

@@ -23,6 +23,7 @@ window.addEventListener('load', () => {
         'content/modules/bcx.js',
         'content/modules/chatLogger.js',
         'content/modules/dataLogger.js',
+        'content/modules/chatBox.js',
 
         // main.js as last
         'content/main.js'

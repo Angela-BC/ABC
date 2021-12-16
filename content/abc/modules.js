@@ -9,7 +9,7 @@
 
     const onCapabilities = (moduleCapabilities, action) => {
         items.forEach(module => {
-            for(let i=0; i<moduleCapabilities.length;i++){
+            for(let i=0; i<moduleCapabilities.length; i++){
                 const moduleCapability = moduleCapabilities[i]
                 if (module.capabilities.indexOf(moduleCapability) >= 0){
                     action(module)
@@ -36,7 +36,16 @@
     }
 
     const onDataMessage = (type, data) => {
-        dataListeners.forEach(listener => listener.onData(type, data))
+        dataListeners.forEach(listener => {
+            if (listener.type && listener.type !== type) 
+                return
+            const action = listener.action ?? 'onData'               
+            const handler = listener.module[action]
+            if (handler)
+                handler(data)
+            else
+                error(`No handler for action ${listener.type}`)
+        })
     }
 
     const capabilities = window.__abc.capabilities
@@ -51,7 +60,8 @@
             onCapabilities([capabilities.onAction], module => messageListeners.push({ module, type: 'Action' }))
             onCapabilities([capabilities.onActivity], module => messageListeners.push({ module, type: 'Activity' }))
             onCapabilities([capabilities.onHidden], module => messageListeners.push({ module, type: 'Hidden' }))
-            onCapabilities([capabilities.onData], module => dataListeners.push(module))
+            onCapabilities([capabilities.onData], module => dataListeners.push({ module }))
+            onCapabilities([capabilities.onRoomEnter], module => dataListeners.push({ module, type: 'ChatRoomSync', action: 'onRoomEnter' }))
         }, 2000)
     }
 
