@@ -16,7 +16,7 @@
     }
 
     const onRoomEnter = () => {
-        setTimeout(chatBoxInit, 1000)
+        setTimeout(() => new ChatBox('InputChat'), 1000)
     }
 
     const onRoomLeave = () => {
@@ -28,7 +28,7 @@
             context.capabilities.onStart,
             context.capabilities.onRoomEnter,
             context.capabilities.onRoomLeave
-        ],
+        ], 
         onRoomEnter,
         onRoomLeave,
         onStart

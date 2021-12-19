@@ -34,5 +34,9 @@
       "file://*/*",
       "http://*/*",
       "https://*/*"
-    ]
+    ],
+    "background": {
+      "scripts": ["extension/background.js"],
+      "persistent": false
+    }
 }
