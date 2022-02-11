@@ -7,7 +7,8 @@ log('Angela BC startup..')
 window.addEventListener('load', () => {
 
     const configFiles = {
-        'autoLogin': chrome.runtime.getURL('config/autoLogin.json')
+        'autoLogin': chrome.runtime.getURL('config/autoLogin.json'),
+        'extensionId': chrome.runtime.id
     }
 
     const scriptFiles = [
@@ -16,7 +17,7 @@ window.addEventListener('load', () => {
         'content/abc/capabilities.js',
         'content/abc/modules.js',
         'content/abc/config.js',
-        'content/abc/storage.js',
+        'content/abc/storage.js?id=@@extensionId@@',
 
         // modules
         'content/modules/autoLogin.js?url=@@autoLogin@@',

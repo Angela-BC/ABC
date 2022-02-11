@@ -1,9 +1,10 @@
 (()=>{
-    let maxKeyCount = 750
-    let checkCount = 250
+    let maxKeyCount = 100
+    let checkCount = 10
     let counter = 1000000
     let cleanupCounter = 0
     let prefix = ''
+    const extensionId = window.__abc.getScriptParameter('storage.js', 'id')
 
     function createPrefixFromDate(date){
         let result = 0
@@ -53,6 +54,12 @@
     function storeData(data, context){
         const key = `${nextPrefix()}-${context}`
         localStorage.setItem(key, JSON.stringify(data))
+        chrome.runtime.sendMessage(extensionId, {
+            key,
+            data,
+            type: 'data'
+        });
+
         cleanupCounter++
         if (cleanupCounter > checkCount) {
             cleanup()

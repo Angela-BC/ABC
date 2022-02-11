@@ -7,6 +7,7 @@
         onActivity: 5,
         onEmote: 6,
         onHidden: 7,
-        onData: 8
+        onData: 8,
+        onStatus: 9
     }
 })()

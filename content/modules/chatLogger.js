@@ -40,14 +40,16 @@
             context.capabilities.onEmote, 
             context.capabilities.onAction,
             context.capabilities.onActivity,
-            context.capabilities.onHidden
+            context.capabilities.onHidden,
+            context.capabilities.onStatus
         ],
         onChat,
         onWhisper,
         onEmote,
         onAction,
         onActivity: onAction,
-        onHidden
+        onHidden,
+        onStatus: onHidden
     })   
 
 })(window.__abc)

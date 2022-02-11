@@ -60,6 +60,7 @@
             onCapabilities([capabilities.onAction], module => messageListeners.push({ module, type: 'Action' }))
             onCapabilities([capabilities.onActivity], module => messageListeners.push({ module, type: 'Activity' }))
             onCapabilities([capabilities.onHidden], module => messageListeners.push({ module, type: 'Hidden' }))
+            onCapabilities([capabilities.onStatus], module => messageListeners.push({ module, type: 'Status' }))
             onCapabilities([capabilities.onData], module => dataListeners.push({ module }))
             onCapabilities([capabilities.onRoomEnter], module => dataListeners.push({ module, type: 'ChatRoomSync', action: 'onRoomEnter' }))
         }, 2000)

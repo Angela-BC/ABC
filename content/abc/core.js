@@ -47,6 +47,27 @@
         log(`Register handler for event ${event}`)
     }
 
+    const getScriptParameter = (filename, parameter) => {
+        const scripts = document.getElementsByTagName('script')
+        for (let i=0; i<scripts.length; i++){
+            const src = scripts[i].src
+            if (src.indexOf(filename) >= 0){
+                const lookup = `&${parameter}=`
+                const urlIndex = src.indexOf(lookup)
+                if (urlIndex > 0){
+                    let result = src.substring(urlIndex + lookup.length)
+                    const nextParam = result.indexOf('&')
+                    if (nextParam > 0){
+                        result = result.substring(0, nextParam - 1)
+                    }
+                    result = decodeURIComponent(result)
+                    return result
+                }
+            }
+        }
+        return null
+    }
+
     window.__abc = {
         log,
         error,
@@ -54,6 +75,7 @@
         setConfigFile,
         getConfigUrl,
         registerListener,
-        registerAllListener
+        registerAllListener,
+        getScriptParameter
     }
 })()
