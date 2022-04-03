@@ -45,7 +45,7 @@
                     ElementValue('InputPassword',password)
                     RelogSend()
                 })
-            }, 2000)
+            }, 3000 + Math.floor(Math.random() * 10000))
         })    
     }
 
